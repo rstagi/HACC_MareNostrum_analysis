@@ -2,9 +2,12 @@
 
 echo "Starting TEST job"
 
-if [ -z "$EXTRAE_HOME" ]; then
+if [ test -n "$(module list fftw 2>&1> /dev/null | grep \"None found\")"
+	|| test -n "$(module list BSCTOOLS 2>&1> /dev/null | grep \"None found\")" 
+	|| test -n "$(module list openmp 2>&1> /dev/null | grep \"None found\")" ]; then
+	
 	echo "Environment hasn't been set yet. Initializing it now..."
-	source ~/environment.sh
+	source $(pwd)/environment/run_env.sh
 else
 	echo "Environment has been set and it's ready."
 fi

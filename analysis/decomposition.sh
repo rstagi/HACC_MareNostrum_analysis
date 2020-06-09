@@ -1,12 +1,13 @@
 #!/bin/bash
 
-echo "Starting strong analysis on small input"
+echo "Starting decomposition analysis"
 
-if [ -z "$EXTRAE_HOME" ]; then
-	echo "Environment hasn't been set yet. Initializing it now..."
-	source ~/environment.sh
+if [ ! -z "$(module list fftw 2>&1> /dev/null | grep 'None found')" ] || [ ! -z "$(module list BSCTOOLS 2>&1> /dev/null | grep 'None found')" ] || [ ! -z "$(module list openmp 2>&1> /dev/null | grep 'None found')" ]; then
+
+        echo "Environment hasn't been set yet. Initializing it now..."
+        source $(pwd)/environment/run_env.bash
 else
-	echo "Environment has been set and it's ready."
+        echo "Environment has been set and it's ready."
 fi
 
 echo "Start running the jobs"
