@@ -2,14 +2,12 @@
 
 echo "Starting TEST job"
 
-if [ test -n "$(module list fftw 2>&1> /dev/null | grep \"None found\")"
-	|| test -n "$(module list BSCTOOLS 2>&1> /dev/null | grep \"None found\")" 
-	|| test -n "$(module list openmp 2>&1> /dev/null | grep \"None found\")" ]; then
-	
-	echo "Environment hasn't been set yet. Initializing it now..."
-	source $(pwd)/environment/run_env.sh
+if [ ! -z "$(module list fftw 2>&1> /dev/null | grep 'None found')" ] || [ ! -z "$(module list BSCTOOLS 2>&1> /dev/null | grep 'None found')" ] || [ ! -z "$(module list openmp 2>&1> /dev/null | grep 'None found')" ]; then
+
+        echo "Environment hasn't been set yet. Initializing it now..."
+        source $(pwd)/environment/run_env.bash
 else
-	echo "Environment has been set and it's ready."
+        echo "Environment has been set and it's ready."
 fi
 
 export OMP_NUM_THREADS=1
